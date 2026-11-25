@@ -29,6 +29,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public bool GetDead()
+    {
+        return isDead;
+    }
+
     void OnCollisionEnter2D (Collision2D collider) {
 
         if (collider.gameObject.tag == "Enemy")
