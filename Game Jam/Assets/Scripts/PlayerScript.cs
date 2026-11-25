@@ -6,6 +6,8 @@ public class PlayerScript : MonoBehaviour
     private float moveSpeed = 10f;
     [SerializeField] private float playerHealth = 100f;
     [SerializeField] private bool isDead = false;
+    private float takeDamageRate = 0.2f;
+    private float enemyCollisionTimer = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,11 +36,14 @@ public class PlayerScript : MonoBehaviour
         return isDead;
     }
 
-    void OnCollisionEnter2D (Collision2D collider) {
+    void OnCollisionStay2D (Collision2D collider) {
 
-        if (collider.gameObject.tag == "Enemy")
+        enemyCollisionTimer += Time.deltaTime;
+
+        if (collider.gameObject.tag == "Enemy" && enemyCollisionTimer >= takeDamageRate)
         {
             TakeDamage(10);
+            enemyCollisionTimer = 0f;
         }
     }
 
