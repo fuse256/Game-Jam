@@ -6,6 +6,7 @@ public class EnemySpawnScript : MonoBehaviour
     [SerializeField] private GameObject enemy;
     private float spawnRate = 10f;
     private float timer = 0f;
+    [SerializeField] private GameObject enemies;
     private Rigidbody2D enemyRb;
     void Start()
     {
@@ -18,7 +19,7 @@ public class EnemySpawnScript : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= spawnRate)
         {
-            GameObject newEnemy = Instantiate(enemy,gameObject.transform.position, Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemy,gameObject.transform.position, Quaternion.identity, enemies.transform);
             enemyRb = newEnemy.gameObject.GetComponent<Rigidbody2D>();
             timer = 0f;
         }

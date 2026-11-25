@@ -41,4 +41,9 @@ public class PlayerScript : MonoBehaviour
             TakeDamage(10);
         }
     }
+
+    public float GetPlayerHealth()
+    {
+        return playerHealth;
+    }
 }
