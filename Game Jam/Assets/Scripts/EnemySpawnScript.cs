@@ -20,7 +20,6 @@ public class EnemySpawnScript : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(enemy,gameObject.transform.position, Quaternion.identity);
             enemyRb = newEnemy.gameObject.GetComponent<Rigidbody2D>();
-            enemyRb.linearVelocity = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
             timer = 0f;
         }
     }
