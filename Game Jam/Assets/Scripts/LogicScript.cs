@@ -10,7 +10,11 @@ public class LogicScript : MonoBehaviour
     [SerializeField] private GameObject playerHealthUI;
     [SerializeField] private TextMeshProUGUI playerHealthText;
     [SerializeField] private GameObject enemySpawners;
+    [SerializeField] private GameObject waveUI;
+    [SerializeField] private TextMeshProUGUI waveText;
     private PlayerScript playerScript;
+    private float waveTimer = 10f;
+    private int waveCount = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +33,13 @@ public class LogicScript : MonoBehaviour
         }
         float currentPlayerHealth = playerScript.GetPlayerHealth();
         playerHealthText.text = "Health: " + currentPlayerHealth.ToString();
+        waveTimer -= Time.deltaTime;
+        if (waveTimer <= 0 && playerScript.GetDead() == false)
+        {
+            waveCount += 1;
+            waveText.text = "Wave: " + waveCount.ToString();
+            waveTimer = 10;
+        }
 
     }
 
@@ -39,6 +50,7 @@ public class LogicScript : MonoBehaviour
         enemies.SetActive(true);
         playerHealthUI.SetActive(true);
         enemySpawners.SetActive(true);
+        waveUI.SetActive(true);
     }
 
 
