@@ -12,6 +12,7 @@ public class LogicScript : MonoBehaviour
     [SerializeField] private GameObject enemySpawners;
     [SerializeField] private GameObject waveUI;
     [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI gameOverWaveText;
     private PlayerScript playerScript;
     private float waveTimer = 10f;
     private int waveCount = 1;
@@ -39,6 +40,7 @@ public class LogicScript : MonoBehaviour
             waveCount += 1;
             waveText.text = "Wave: " + waveCount.ToString();
             waveTimer = 10;
+            gameOverWaveText.text = "You made it to wave " + waveCount.ToString() + "!";
         }
 
     }
