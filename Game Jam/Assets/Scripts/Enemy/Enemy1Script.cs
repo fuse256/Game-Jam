@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy1Script : MonoBehaviour
@@ -7,10 +8,13 @@ public class Enemy1Script : MonoBehaviour
     private Rigidbody2D myRb;
 
     [SerializeField] private float moveSpeed = 4f;
-    [SerializeField] private int health = 100;
+    [SerializeField] private float health = 100;
     [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private float damage = 10;
     [SerializeField] private float attackRange = 1.2f;
+    [SerializeField] private bool canFireProjectiles = false;
+    [SerializeField] private float firePositionXOffset = 0.5f;
+    [SerializeField] private GameObject projectile;
 
     private float timeSinceAttack = 0f;
     private int facingDirection = -1;
@@ -26,24 +30,32 @@ public class Enemy1Script : MonoBehaviour
     {
         playerPos = player.transform.position;
         Vector3 currentPos = gameObject.transform.position;
+        Vector2 direction = (playerPos - transform.position).normalized;
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
         timeSinceAttack += Time.deltaTime;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        
         if (distanceToPlayer <= attackRange)
         {
             myRb.linearVelocity = Vector2.zero;
-            MeleeAttack();
+
+            if (canFireProjectiles)
+            {
+                RangedAttack(direction);
+            }
+            else
+            {
+                MeleeAttack();
+            }
         }
         else
         {
-            ChasePlayer();
+            ChasePlayer(direction);
         }
     }
 
-    private void ChasePlayer()
+    private void ChasePlayer(Vector2 direction)
     {
-        Vector2 direction = (playerPos - transform.position).normalized;
 
         if (playerPos.x > transform.position.x && facingDirection == -1 ||
             playerPos.x < transform.position.x && facingDirection == 1)
@@ -72,5 +84,28 @@ public class Enemy1Script : MonoBehaviour
                 Debug.Log("Enemy hit player");
             }
         }
+    }
+
+    private void RangedAttack(Vector2 direction)
+    {
+        if (!canFireProjectiles || projectile == null)
+        {
+            return;
+        }
+
+        if (timeSinceAttack >= attackCooldown)
+        {
+            // Vector3 projectileSpawn = transform.position + new Vector3(facingDirection * firePositionXOffset, transform.position.y);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+            Instantiate(projectile, transform.position, rotation);
+
+            timeSinceAttack = timeSinceAttack % attackCooldown;
+        }
+    }
+
+    public void ChangeHealth(float amount)
+    {
+        health += amount;
     }
 }
