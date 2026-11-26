@@ -22,9 +22,10 @@ public class PlayerScript : MonoBehaviour
         myRb.linearVelocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
     }
 
-    void TakeDamage(float x)
+    // This function can be used for taking damage or for healing (damage should be negative)
+    public void ChangeHealth(float amount)
     {
-        playerHealth = playerHealth - x;
+        playerHealth += amount;
         if (playerHealth <= 0)
         {
             isDead = true;
@@ -37,14 +38,15 @@ public class PlayerScript : MonoBehaviour
     }
 
     void OnCollisionStay2D (Collision2D collider) {
-
+        /*
         enemyCollisionTimer += Time.deltaTime;
 
         if (collider.gameObject.tag == "Enemy" && enemyCollisionTimer >= takeDamageRate)
         {
-            TakeDamage(10);
+            ChangeHealth(-10);
             enemyCollisionTimer = 0f;
         }
+        */
     }
 
     public float GetPlayerHealth()
