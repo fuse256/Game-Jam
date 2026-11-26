@@ -34,6 +34,7 @@ public class LogicScript : MonoBehaviour
             player.SetActive(false);
             enemies.SetActive(false);
             enemySpawners.SetActive(false);
+            dashUI.SetActive(false);
         }
         float currentPlayerHealth = playerScript.GetPlayerHealth();
         playerHealthText.text = "Health: " + currentPlayerHealth.ToString();
