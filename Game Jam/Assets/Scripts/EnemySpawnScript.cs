@@ -20,7 +20,6 @@ public class EnemySpawnScript : MonoBehaviour
         if (timer >= spawnRate)
         {
             GameObject newEnemy = Instantiate(enemy,gameObject.transform.position, Quaternion.identity, enemies.transform);
-            enemyRb = newEnemy.gameObject.GetComponent<Rigidbody2D>();
             timer = 0f;
         }
     }
