@@ -6,6 +6,7 @@ public class LogicScript : MonoBehaviour
     [SerializeField] private GameObject startGame;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject enemies;
+    [SerializeField] private GameObject projectiles;
     [SerializeField] private GameObject endGame;
     [SerializeField] private GameObject playerHealthUI;
     [SerializeField] private TextMeshProUGUI playerHealthText;
@@ -33,6 +34,7 @@ public class LogicScript : MonoBehaviour
             endGame.SetActive(true);
             player.SetActive(false);
             enemies.SetActive(false);
+            projectiles.SetActive(false);
             enemySpawners.SetActive(false);
             dashUI.SetActive(false);
         }
@@ -73,6 +75,7 @@ public class LogicScript : MonoBehaviour
         startGame.SetActive(false);
         player.SetActive(true);
         enemies.SetActive(true);
+        projectiles.SetActive(true);
         playerHealthUI.SetActive(true);
         enemySpawners.SetActive(true);
         waveUI.SetActive(true);
