@@ -14,6 +14,8 @@ public class LogicScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI gameOverWaveText;
     [SerializeField] private GameObject background;
+    [SerializeField] private TextMeshProUGUI dashText;
+    [SerializeField] private GameObject dashUI;
     private PlayerScript playerScript;
     private float waveTimer = 10f;
     private int waveCount = 1;
@@ -42,6 +44,25 @@ public class LogicScript : MonoBehaviour
             waveText.text = "Wave: " + waveCount.ToString();
             waveTimer = 10;
             gameOverWaveText.text = "You made it to wave " + waveCount.ToString() + "!";
+        }
+
+        if (playerScript.GetIsDashing() == false && startGame.activeSelf == false)
+        {
+            float dashCooldownTimer = playerScript.GetDashCooldownTimer();
+            float dashCooldown = playerScript.GetDashCooldown();
+            if (dashCooldownTimer < dashCooldown)
+            {
+                dashUI.SetActive(true);
+                dashText.text = (((int) (dashCooldown - dashCooldownTimer) + 1)).ToString();
+            }
+            else
+            {
+                dashUI.SetActive(false);
+            }
+        }
+        else
+        {
+            dashUI.SetActive(false);
         }
 
     }

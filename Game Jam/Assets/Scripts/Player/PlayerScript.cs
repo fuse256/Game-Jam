@@ -76,6 +76,26 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public bool GetIsDashing()
+    {
+        return isDashing;
+    }
+
+    public float GetDashDurationTimer()
+    {
+        return dashDurationTimer;
+    }
+
+    public float GetDashCooldownTimer()
+    {
+        return dashCooldownTimer;
+    }
+
+    public float GetDashCooldown()
+    {
+        return dashCooldown;
+    }
+
     public bool GetDead()
     {
         return isDead;
