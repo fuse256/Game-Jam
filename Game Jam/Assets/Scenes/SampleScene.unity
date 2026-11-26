@@ -687,10 +687,10 @@ MonoBehaviour:
   health: 100
   attackCooldown: 1.5
   damage: 10
-  attackRange: 1.2
-  canFireProjectiles: 0
+  attackRange: 7.5
+  canFireProjectiles: 1
   firePositionXOffset: 0.5
-  projectile: {fileID: 0}
+  projectile: {fileID: 1053695110}
 --- !u!50 &260013929
 Rigidbody2D:
   serializedVersion: 5
@@ -756,7 +756,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.8828125, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -813,7 +813,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2433,7 +2433,7 @@ GameObject:
   - component: {fileID: 1053695115}
   - component: {fileID: 1053695114}
   - component: {fileID: 1053695113}
-  - component: {fileID: 1053695112}
+  - component: {fileID: 1053695116}
   m_Layer: 0
   m_Name: Projectile1
   m_TagString: Projectile
@@ -2451,32 +2451,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8.55, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1775349428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1053695112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053695110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cc15b18992a444fb74c3df226f7ad7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  player: {fileID: 71788454}
-  moveSpeed: 4
-  health: 100
-  attackCooldown: 1.5
-  damage: 10
-  attackRange: 1.2
-  canFireProjectiles: 0
-  firePositionXOffset: 0.5
-  projectile: {fileID: 0}
 --- !u!50 &1053695113
 Rigidbody2D:
   serializedVersion: 5
@@ -2534,7 +2513,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -2610,6 +2589,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1053695116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053695110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b6c0bd4a7f0a044a5f4ce52f72e215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Projectile1Script
+  speed: 10
+  lifeTime: 3
+  damage: 10
 --- !u!1 &1081556871
 GameObject:
   m_ObjectHideFlags: 0
