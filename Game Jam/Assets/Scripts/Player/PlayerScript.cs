@@ -8,6 +8,11 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private bool isDead = false;
     private float takeDamageRate = 0.2f;
     private float enemyCollisionTimer = 0f;
+    private bool isDashing = false;
+    private float dashCooldown = 5f;
+    [SerializeField] private float dashDurationTimer = 0f;
+    [SerializeField] private float dashCooldownTimer = 5f;
+    private float dashDuration = 3f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +25,41 @@ public class PlayerScript : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         myRb.linearVelocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
+        if (Input.GetKeyDown("space") && isDashing == false && dashCooldownTimer >= dashCooldown)
+        {
+            Dash();
+            dashCooldownTimer = 0f;
+        }
+
+        if (isDashing == true)
+        {
+            dashDurationTimer += Time.deltaTime;
+            if (dashDurationTimer >= dashDuration)
+            {
+                UndoDash();
+                dashDurationTimer = 0f;
+            }
+        }
+
+        if (isDashing == false)
+        {
+            dashCooldownTimer += Time.deltaTime;
+        }
+
     }
+
+    void Dash()
+    {
+        isDashing = true;
+        moveSpeed = 30f;
+    }
+
+    void UndoDash()
+    {
+        isDashing = false;
+        moveSpeed = 10f;
+    }
+
 
     // This function can be used for taking damage or for healing (damage should be negative)
     public void ChangeHealth(float amount)
