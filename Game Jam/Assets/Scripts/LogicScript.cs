@@ -13,6 +13,7 @@ public class LogicScript : MonoBehaviour
     [SerializeField] private GameObject waveUI;
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI gameOverWaveText;
+    [SerializeField] private GameObject background;
     private PlayerScript playerScript;
     private float waveTimer = 10f;
     private int waveCount = 1;
@@ -53,6 +54,7 @@ public class LogicScript : MonoBehaviour
         playerHealthUI.SetActive(true);
         enemySpawners.SetActive(true);
         waveUI.SetActive(true);
+        background.SetActive(true);
     }
 
 
