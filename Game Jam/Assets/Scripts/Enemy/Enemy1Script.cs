@@ -7,7 +7,7 @@ public class Enemy1Script : MonoBehaviour
     private Rigidbody2D myRb;
 
     [SerializeField] private float moveSpeed = 4f;
-    [SerializeField] private int health = 100;
+    [SerializeField] private float health = 100;
     [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private float damage = 10;
     [SerializeField] private float attackRange = 1.2f;
@@ -72,5 +72,10 @@ public class Enemy1Script : MonoBehaviour
                 Debug.Log("Enemy hit player");
             }
         }
+    }
+
+    public void ChangeHealth(float amount)
+    {
+        health += amount;
     }
 }
