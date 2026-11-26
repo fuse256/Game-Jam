@@ -12,11 +12,14 @@ public class PlayerScript : MonoBehaviour
     private float dashCooldown = 5f;
     [SerializeField] private float dashDurationTimer = 0f;
     [SerializeField] private float dashCooldownTimer = 5f;
-    private float dashDuration = 3f;
+    private float dashDuration = 1f;
+    private AudioSource source;
+    [SerializeField] private AudioClip dashSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         myRb = gameObject.GetComponent<Rigidbody2D>();
+        source = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,6 +55,8 @@ public class PlayerScript : MonoBehaviour
     {
         isDashing = true;
         moveSpeed = 30f;
+        source.clip = dashSound;
+        source.Play();
     }
 
     void UndoDash()
