@@ -2491,10 +2491,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
-<<<<<<< Updated upstream
       propertyPath: m_Enabled
       value: 1
-=======
       propertyPath: m_Size.x
       value: 0.7998905
       objectReference: {fileID: 0}
@@ -2509,7 +2507,6 @@ PrefabInstance:
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_Offset.y
       value: -0.045024633
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -4971,11 +4968,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826217865787188229, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< Updated upstream
       value: 8.34
-=======
       value: 6.9
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 5826217865787188229, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5014,21 +5008,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
-<<<<<<< Updated upstream
-      propertyPath: m_Size.x
-      value: 0.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-=======
       propertyPath: m_Size.y
       value: 1.3601973
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_Offset.y
       value: -0.000000059604645
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -5104,11 +5089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3265490722062438888, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
       propertyPath: m_LocalPosition.y
-<<<<<<< Updated upstream
-      value: 2.44
-=======
       value: -2.06
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 3265490722062438888, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
       propertyPath: m_LocalPosition.z
