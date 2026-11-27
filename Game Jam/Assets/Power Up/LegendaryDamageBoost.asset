@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUp
   displayName: Legendary Damage Boost
   description: Increases player damage by 50%
-  rarity: 2
+  rarity: 3
   icon: {fileID: -3753825769889500098, guid: 210d1ac3ce452bb4cac64865d2e33692, type: 3}

@@ -15,4 +15,4 @@ MonoBehaviour:
   displayName: Legendary Health Boost
   description: Max health increases to 200.
   rarity: 3
-  icon: {fileID: -1130091594099060528, guid: 7f84ef572ebfa214eb4903b25e9a0aed, type: 3}
+  icon: {fileID: -1130091594099060528, guid: 51abb513ea08e1341b87cea605b3c58e, type: 3}
