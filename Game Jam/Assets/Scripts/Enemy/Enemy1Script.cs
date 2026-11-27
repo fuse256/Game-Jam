@@ -12,7 +12,7 @@ public class Enemy1Script : MonoBehaviour
     [SerializeField] private float health = 100;
     [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private float damage = 10;
-    [SerializeField] private float attackRange = 1.2f;
+    [SerializeField] private float attackRange = 3f;
     [SerializeField] private bool canFireProjectiles = false;
     [SerializeField] private float firePositionXOffset = 0.5f;
     [SerializeField] private GameObject projectile;
@@ -58,13 +58,11 @@ public class Enemy1Script : MonoBehaviour
 
             if (canFireProjectiles)
             {
-                myAn.SetTrigger("isAttack");
                 RangedAttack(direction);
                 
             }
             else
             {
-                myAn.SetTrigger("isAttack");
                 MeleeAttack();
                 
             }
@@ -93,6 +91,7 @@ public class Enemy1Script : MonoBehaviour
 
             if (player.TryGetComponent(out PlayerScript playerScript))
             {
+                myAn.SetTrigger("isAttack");
                 playerScript.ChangeHealth(-damage);
                 Debug.Log("Enemy hit player");
             }
@@ -108,6 +107,7 @@ public class Enemy1Script : MonoBehaviour
 
         if (timeSinceAttack >= attackCooldown)
         {
+            myAn.SetTrigger("isAttack");
             // Vector3 projectileSpawn = transform.position + new Vector3(facingDirection * firePositionXOffset, transform.position.y);
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
