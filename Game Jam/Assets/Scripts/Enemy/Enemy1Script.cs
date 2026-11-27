@@ -1,6 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
-
+using System.Collections;
 public class Enemy1Script : MonoBehaviour
 {
     [SerializeField] private GameObject player;
@@ -16,8 +16,10 @@ public class Enemy1Script : MonoBehaviour
     [SerializeField] private bool canFireProjectiles = false;
     [SerializeField] private float firePositionXOffset = 0.5f;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private float attackDuration = 0.3f;
 
     private float timeSinceAttack = 0f;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,7 +65,7 @@ public class Enemy1Script : MonoBehaviour
             }
             else
             {
-                MeleeAttack();
+                StartCoroutine(MeleeAttack());
                 
             }
         }
@@ -83,20 +85,28 @@ public class Enemy1Script : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
-    private void MeleeAttack()
+    IEnumerator MeleeAttack()
     {
         if (timeSinceAttack >= attackCooldown)
         {
+            
             timeSinceAttack = 0f;
 
             if (player.TryGetComponent(out PlayerScript playerScript))
             {
                 myAn.SetTrigger("isAttack");
+                yield return new WaitForSeconds(attackDuration);
+                float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+                    if (distanceToPlayer > attackRange)
+                    {
+                        yield break;
+                    }
                 playerScript.ChangeHealth(-damage);
                 Debug.Log("Enemy hit player");
             }
         }
     }
+
 
     private void RangedAttack(Vector2 direction)
     {
