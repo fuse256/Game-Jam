@@ -18,7 +18,6 @@ public class Enemy1Script : MonoBehaviour
     [SerializeField] private GameObject projectile;
 
     private float timeSinceAttack = 0f;
-    private int facingDirection = -1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,7 +34,14 @@ public class Enemy1Script : MonoBehaviour
         Vector2 direction = (playerPos - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
+        bool playerIsToRight = playerPos.x > transform.position.x;
+
         timeSinceAttack += Time.deltaTime;
+
+        if (playerIsToRight && transform.localScale.x < 0 || !playerIsToRight && transform.localScale.x > 0)
+        {
+            Flip();
+        }
 
         if (myRb.linearVelocity == Vector2.zero)
         {
@@ -71,19 +77,11 @@ public class Enemy1Script : MonoBehaviour
 
     private void ChasePlayer(Vector2 direction)
     {
-
-        if (playerPos.x > transform.position.x && facingDirection == -1 ||
-            playerPos.x < transform.position.x && facingDirection == 1)
-        {
-            Flip();
-        }
-
         myRb.linearVelocity = direction * moveSpeed;
     }
 
     private void Flip()
     {
-        facingDirection *= -1;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
@@ -91,7 +89,7 @@ public class Enemy1Script : MonoBehaviour
     {
         if (timeSinceAttack >= attackCooldown)
         {
-            timeSinceAttack = timeSinceAttack % attackCooldown;
+            timeSinceAttack = 0f;
 
             if (player.TryGetComponent(out PlayerScript playerScript))
             {
@@ -115,7 +113,7 @@ public class Enemy1Script : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
             Instantiate(projectile, transform.position, rotation);
 
-            timeSinceAttack = timeSinceAttack % attackCooldown;
+            timeSinceAttack = 0f;
         }
     }
 

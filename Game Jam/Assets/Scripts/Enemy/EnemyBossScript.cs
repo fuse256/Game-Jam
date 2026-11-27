@@ -58,8 +58,8 @@ public class EnemyBossScript : MonoBehaviour
         private void ChasePlayer(Vector2 direction)
     {
 
-        if (playerPos.x > transform.position.x && facingDirection == -1 ||
-            playerPos.x < transform.position.x && facingDirection == 1)
+        if (playerPos.x < transform.position.x && facingDirection == -1 ||
+            playerPos.x > transform.position.x && facingDirection == 1)
         {
             Flip();
         }
@@ -76,7 +76,7 @@ public class EnemyBossScript : MonoBehaviour
     {
         if (timeSinceAttack >= attackCooldown)
         {
-            timeSinceAttack = timeSinceAttack % attackCooldown;
+            timeSinceAttack = 0f;
 
             if (player.TryGetComponent(out PlayerScript playerScript))
             {
