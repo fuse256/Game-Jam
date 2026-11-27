@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 71788458}
   - component: {fileID: 71788459}
   - component: {fileID: 71788460}
+  - component: {fileID: 71788461}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -304,9 +305,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
   playerHealth: 100
   isDead: 0
-  dashDurationTimer: 0
-  dashCooldownTimer: 5
-  dashSound: {fileID: 8300000, guid: 19a6ff6c7e0c20448b8e128d6d3c66d1, type: 3}
+  slideDurationTimer: 0
+  slideCooldownTimer: 5
+  slideSound: {fileID: 0}
 --- !u!212 &71788456
 SpriteRenderer:
   serializedVersion: 3
@@ -356,7 +357,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -1817026873, guid: a87ddf9532a20fd43ad1d4804313c6e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -542,6 +543,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &71788461
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71788454}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2940c85c45e074c48bf5e84e68f47b99, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &219369202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,8 +1726,8 @@ MonoBehaviour:
   waveText: {fileID: 487818948}
   gameOverWaveText: {fileID: 1719783459}
   background: {fileID: 610877100}
-  dashText: {fileID: 359145799}
-  dashUI: {fileID: 772619784}
+  slideText: {fileID: 359145799}
+  slideUI: {fileID: 772619784}
 --- !u!4 &512700392
 Transform:
   m_ObjectHideFlags: 0
@@ -2372,7 +2395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 772619785}
   m_Layer: 0
-  m_Name: DashUI
+  m_Name: SlideUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2468,8 +2491,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
+<<<<<<< Updated upstream
       propertyPath: m_Enabled
       value: 1
+=======
+      propertyPath: m_Size.x
+      value: 0.7998905
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4702578
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.010004997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.045024633
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -2811,7 +2851,7 @@ GameObject:
   - component: {fileID: 1081556874}
   - component: {fileID: 1081556873}
   m_Layer: 0
-  m_Name: Dash
+  m_Name: Slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4931,7 +4971,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826217865787188229, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< Updated upstream
       value: 8.34
+=======
+      value: 6.9
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 5826217865787188229, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4970,12 +5014,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
+<<<<<<< Updated upstream
       propertyPath: m_Size.x
       value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_Enabled
       value: 1
+=======
+      propertyPath: m_Size.y
+      value: 1.3601973
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.000000059604645
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8778875398219640858, guid: 7d9b89924c7ef6b489e9b74385a9dbee, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -5014,6 +5067,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 761755021}
     m_Modifications:
     - target: {fileID: 396013522123321253, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6603613
+      objectReference: {fileID: 0}
+    - target: {fileID: 396013522123321253, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6003289
+      objectReference: {fileID: 0}
+    - target: {fileID: 396013522123321253, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.030016422
+      objectReference: {fileID: 0}
+    - target: {fileID: 396013522123321253, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.10005474
+      objectReference: {fileID: 0}
+    - target: {fileID: 396013522123321253, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2.46875
       objectReference: {fileID: 0}
@@ -5035,7 +5104,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3265490722062438888, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
       propertyPath: m_LocalPosition.y
+<<<<<<< Updated upstream
       value: 2.44
+=======
+      value: -2.06
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 3265490722062438888, guid: 4f17b7fc1e176f443a06d30b14f26328, type: 3}
       propertyPath: m_LocalPosition.z

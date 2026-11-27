@@ -15,8 +15,9 @@ public class LogicScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI gameOverWaveText;
     [SerializeField] private GameObject background;
-    [SerializeField] private TextMeshProUGUI dashText;
-    [SerializeField] private GameObject dashUI;
+    [SerializeField] private TextMeshProUGUI slideText;
+    [SerializeField] private GameObject slideUI;
+
     private PlayerScript playerScript;
     private int waveCount = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,7 +36,7 @@ public class LogicScript : MonoBehaviour
             enemies.SetActive(false);
             projectiles.SetActive(false);
             enemySpawners.SetActive(false);
-            dashUI.SetActive(false);
+            slideUI.SetActive(false);
         }
         float currentPlayerHealth = playerScript.GetPlayerHealth();
         playerHealthText.text = "Health: " + currentPlayerHealth.ToString();
@@ -46,23 +47,23 @@ public class LogicScript : MonoBehaviour
             gameOverWaveText.text = "You made it to wave " + waveCount.ToString() + "!";
         }
 
-        if (playerScript.GetIsDashing() == false && startGame.activeSelf == false)
+        if (playerScript.GetIsSliding() == false && startGame.activeSelf == false)
         {
-            float dashCooldownTimer = playerScript.GetDashCooldownTimer();
-            float dashCooldown = playerScript.GetDashCooldown();
-            if (dashCooldownTimer < dashCooldown)
+            float slideCooldownTimer = playerScript.GetSlideCooldownTimer();
+            float slideCooldown = playerScript.GetSlideCooldown();
+            if (slideCooldownTimer < slideCooldown)
             {
-                dashUI.SetActive(true);
-                dashText.text = (((int) (dashCooldown - dashCooldownTimer) + 1)).ToString();
+                slideUI.SetActive(true);
+                slideText.text = (((int) (slideCooldown - slideCooldownTimer) + 1)).ToString();
             }
             else
             {
-                dashUI.SetActive(false);
+                slideUI.SetActive(false);
             }
         }
         else
         {
-            dashUI.SetActive(false);
+            slideUI.SetActive(false);
         }
 
     }
