@@ -18,7 +18,6 @@ public class LogicScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dashText;
     [SerializeField] private GameObject dashUI;
     private PlayerScript playerScript;
-    private float waveTimer = 10f;
     private int waveCount = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,12 +39,10 @@ public class LogicScript : MonoBehaviour
         }
         float currentPlayerHealth = playerScript.GetPlayerHealth();
         playerHealthText.text = "Health: " + currentPlayerHealth.ToString();
-        waveTimer -= Time.deltaTime;
-        if (waveTimer <= 0 && playerScript.GetDead() == false)
+        if (enemies.transform.childCount == 0 && playerScript.GetDead() == false)
         {
             waveCount += 1;
             waveText.text = "Wave: " + waveCount.ToString();
-            waveTimer = 10;
             gameOverWaveText.text = "You made it to wave " + waveCount.ToString() + "!";
         }
 

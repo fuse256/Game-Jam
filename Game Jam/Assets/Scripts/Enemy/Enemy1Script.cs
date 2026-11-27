@@ -6,6 +6,7 @@ public class Enemy1Script : MonoBehaviour
     [SerializeField] private GameObject player;
     private Vector3 playerPos;
     private Rigidbody2D myRb;
+    private Animator myAn;
 
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float health = 100;
@@ -23,6 +24,7 @@ public class Enemy1Script : MonoBehaviour
     void Start()
     {
         myRb = gameObject.GetComponent<Rigidbody2D>();
+        myAn = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -35,17 +37,30 @@ public class Enemy1Script : MonoBehaviour
 
         timeSinceAttack += Time.deltaTime;
 
+        if (myRb.linearVelocity == Vector2.zero)
+        {
+            myAn.SetBool("isWalking", false);
+        }
+        else
+        {
+            myAn.SetBool("isWalking", true);
+        }
+
         if (distanceToPlayer <= attackRange)
         {
             myRb.linearVelocity = Vector2.zero;
 
             if (canFireProjectiles)
             {
+                myAn.SetTrigger("isAttack");
                 RangedAttack(direction);
+                
             }
             else
             {
+                myAn.SetTrigger("isAttack");
                 MeleeAttack();
+                
             }
         }
         else
@@ -106,6 +121,14 @@ public class Enemy1Script : MonoBehaviour
 
     public void ChangeHealth(float amount)
     {
+        if (amount < 0)
+        {
+            myAn.SetTrigger("Hurt");
+        }
         health += amount;
+        if (health <= 0)
+        {
+            myAn.SetTrigger("isDead");
+        }
     }
 }
