@@ -17,6 +17,7 @@ public class Enemy1Script : MonoBehaviour
     [SerializeField] private float firePositionXOffset = 0.5f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private float attackDuration = 0.3f;
+    [SerializeField] private bool spriteFacesRight = true;
 
     private float timeSinceAttack = 0f;
     
@@ -41,7 +42,8 @@ public class Enemy1Script : MonoBehaviour
 
         timeSinceAttack += Time.deltaTime;
 
-        if (playerIsToRight && transform.localScale.x < 0 || !playerIsToRight && transform.localScale.x > 0)
+        if ((spriteFacesRight && (playerIsToRight && transform.localScale.x < 0 || !playerIsToRight && transform.localScale.x > 0)) ||
+            (!spriteFacesRight && (playerIsToRight && transform.localScale.x > 0 || !playerIsToRight && transform.localScale.x < 0)))
         {
             Flip();
         }
