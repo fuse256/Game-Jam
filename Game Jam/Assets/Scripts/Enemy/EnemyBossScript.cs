@@ -1,29 +1,31 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
 public class EnemyBossScript : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     private Vector3 playerPos;
     private Rigidbody2D myRb;
+    private Animator myAn;
 
-    [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float health = 300;
-    [SerializeField] private float attackCooldown = 2.5f;
-    [SerializeField] private float damage = 40;
-    [SerializeField] private float attackRange = 1.2f;
+    [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float health = 100;
+    [SerializeField] private float attackCooldown = 1.5f;
+    [SerializeField] private float damage = 10;
+    [SerializeField] private float attackRange = 3f;
     [SerializeField] private bool canFireProjectiles = false;
     [SerializeField] private float firePositionXOffset = 0.5f;
     [SerializeField] private GameObject projectile;
     private float timeSinceAttack = 0f;
-    private int facingDirection = -1;
-
-
-
+    public enum BossState { Chasing, ChargingAttack, Attacking, Recovering, Dead};
+    private BossState currentState = BossState.Chasing;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         myRb = gameObject.GetComponent<Rigidbody2D>();
+        myAn = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -34,7 +36,24 @@ public class EnemyBossScript : MonoBehaviour
         Vector2 direction = (playerPos - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
+        // 0.1 is a buffer value, sometimes the enemy flipped direction for no reason (likely went beyond the player's x)
+        bool playerIsToRight = playerPos.x > (transform.position.x + 0.1);
+
         timeSinceAttack += Time.deltaTime;
+
+        if (playerIsToRight && transform.localScale.x < 0 || !playerIsToRight && transform.localScale.x > 0)
+        {
+            Flip();
+        }
+
+        if (myRb.linearVelocity == Vector2.zero)
+        {
+            myAn.SetBool("isWalking", false);
+        }
+        else
+        {
+            myAn.SetBool("isWalking", true);
+        }
 
         if (distanceToPlayer <= attackRange)
         {
@@ -43,10 +62,12 @@ public class EnemyBossScript : MonoBehaviour
             if (canFireProjectiles)
             {
                 RangedAttack(direction);
+
             }
             else
             {
                 MeleeAttack();
+
             }
         }
         else
@@ -55,20 +76,13 @@ public class EnemyBossScript : MonoBehaviour
         }
     }
 
-        private void ChasePlayer(Vector2 direction)
+    private void ChasePlayer(Vector2 direction)
     {
-
-        if (playerPos.x < transform.position.x && facingDirection == -1 ||
-            playerPos.x > transform.position.x && facingDirection == 1)
-        {
-            Flip();
-        }
-
         myRb.linearVelocity = direction * moveSpeed;
     }
-        private void Flip()
+
+    private void Flip()
     {
-        facingDirection *= -1;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
@@ -80,6 +94,7 @@ public class EnemyBossScript : MonoBehaviour
 
             if (player.TryGetComponent(out PlayerScript playerScript))
             {
+                myAn.SetTrigger("isAttack");
                 playerScript.ChangeHealth(-damage);
                 Debug.Log("Enemy hit player");
             }
@@ -95,17 +110,26 @@ public class EnemyBossScript : MonoBehaviour
 
         if (timeSinceAttack >= attackCooldown)
         {
+            myAn.SetTrigger("isAttack");
             // Vector3 projectileSpawn = transform.position + new Vector3(facingDirection * firePositionXOffset, transform.position.y);
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
             Instantiate(projectile, transform.position, rotation);
 
-            timeSinceAttack = timeSinceAttack % attackCooldown;
+            timeSinceAttack = 0f;
         }
     }
 
     public void ChangeHealth(float amount)
     {
+        if (amount < 0)
+        {
+            myAn.SetTrigger("Hurt");
+        }
         health += amount;
+        if (health <= 0)
+        {
+            myAn.SetTrigger("isDead");
+        }
     }
 }

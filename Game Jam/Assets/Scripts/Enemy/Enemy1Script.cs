@@ -34,7 +34,8 @@ public class Enemy1Script : MonoBehaviour
         Vector2 direction = (playerPos - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
-        bool playerIsToRight = playerPos.x > transform.position.x;
+        // 0.1 is a buffer value, sometimes the enemy flipped direction for no reason (likely went beyond the player's x)
+        bool playerIsToRight = playerPos.x > (transform.position.x + 0.1);
 
         timeSinceAttack += Time.deltaTime;
 
